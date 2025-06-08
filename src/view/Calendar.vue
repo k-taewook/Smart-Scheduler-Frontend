@@ -250,7 +250,7 @@ export default {
                               this.naturalInput.includes('취소');
 
         const endpoint = isDeleteCommand ? 'delete_schedule' : 'parse_schedule';
-        const response = await fetch(`http://localhost:8000/${endpoint}`, {
+        const response = await fetch(`${process.env.VUE_APP_API_URL}/${endpoint}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -373,7 +373,7 @@ export default {
         console.log('일정 저장 시작:', this.events);
         
         // 백엔드에 일정 저장
-        const response = await fetch('http://localhost:8000/schedules', {
+        const response = await fetch(`${process.env.VUE_APP_API_URL}/schedules`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -423,7 +423,7 @@ export default {
     // 일정 로드
     async loadEvents() {
       try {
-        const response = await fetch('http://localhost:8000/schedules');
+        const response = await fetch(`${process.env.VUE_APP_API_URL}/schedules`);
         if (response.ok) {
           const schedules = await response.json();
           this.events = schedules.map(schedule => ({
@@ -517,7 +517,7 @@ export default {
         console.log('인사이트 로드 시작');
         
         // 주간 요약 가져오기
-        const summaryResponse = await fetch('http://localhost:8000/weekly_summary');
+        const summaryResponse = await fetch(`${process.env.VUE_APP_API_URL}/weekly_summary`);
         if (!summaryResponse.ok) {
           throw new Error('주간 요약을 가져오는데 실패했습니다.');
         }
@@ -539,7 +539,7 @@ export default {
         console.log('주간 요약 데이터:', JSON.stringify(summaryData, null, 2));
 
         // 일정 패턴 가져오기
-        const patternsResponse = await fetch('http://localhost:8000/schedule_patterns');
+        const patternsResponse = await fetch(`${process.env.VUE_APP_API_URL}/schedule_patterns`);
         if (!patternsResponse.ok) {
           throw new Error('일정 패턴을 가져오는데 실패했습니다.');
         }
@@ -604,7 +604,7 @@ export default {
 
     async deleteAllEvents() {
       try {
-        const response = await fetch('http://localhost:8000/delete_all_schedules', {
+        const response = await fetch(`${process.env.VUE_APP_API_URL}/delete_all_schedules`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

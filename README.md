@@ -1,4 +1,4 @@
-# smart-scheduler-frontend
+# Smart Scheduler Frontend
 
 ## Project setup
 ```
